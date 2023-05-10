@@ -2,8 +2,8 @@
 .idea/
 .ipynb_checkpoints/
 dataset/*.txt
-dataset/*.pdf
-processed_dataset_text/*.txt
-processed_dataset/*.pdf
+#dataset/*.pdf
+#processed_dataset_text/*.txt
+#processed_dataset/*.pdf
 results/*.csv
 
