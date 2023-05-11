@@ -1,18 +1,5 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.14.0
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
 
+# +
 import os
 from IPython.display import HTML, display
 import PyPDF2 
@@ -20,6 +7,10 @@ import pdfplumber
 import numpy as np
 import csv
 import re 
+# Send all text into dataframe
+
+import pandas as pd
+import re
 
 # +
 # creating .pdf file objects from existing .pdfs in the same folder as this .ipynb code
@@ -50,7 +41,6 @@ whole_file = whole_file.replace('-',' ')
 
 update_page  = whole_file.split('\n')
 
-import re
 list_title = []
 for i in update_page:
     r1 = re.findall(r"^[A-Z]+\d+\.\s+(?:\w+\s*)+", i)
@@ -108,12 +98,7 @@ print(text)
 
 len(text)
 
-# +
-# Send all text into dataframe
-
-import pandas as pd
 df = pd.DataFrame (text, columns = ['Text'])
-# -
 
 pd.set_option('max_colwidth', None)
 
@@ -121,11 +106,7 @@ text
 
 # # Extract usefull info as a whole
 
-# +
-
-import re
 listt = re.split(r'(\s*\b[A-Z]+\d+\.\s*)', whole_file)
-# -
 
 listt
 
@@ -276,92 +257,6 @@ df2['Email']  = df2['Email'].str.replace(']', '')
 df3 = df2.drop_duplicates()
 
 # +
-# Page number
-df3['Page_Number1'] = df3['Unprocessed_Text'].str.findall('Concurrent Symposia\s\d+')
-df3['Page_Number2'] = df3['Unprocessed_Text'].str.findall('\s\d+\sConcurrent Symposia')
-
-df3['Page_Number3'] = df3['Unprocessed_Text'].str.findall('Concurrent Sessions\s\d+')
-df3['Page_Number4'] = df3['Unprocessed_Text'].str.findall('\s\d+\sConcurrent Sessions')
-
-df3['Page_Number5'] = df3['Unprocessed_Text'].str.findall('Cytogenetics\s\d+')
-df3['Page_Number6'] = df3['Unprocessed_Text'].str.findall('\s\d+\sCytogenetics')
-
-df3['Page_Number7'] = df3['Unprocessed_Text'].str.findall('Clinical Genetics and Dysmorphology\s\d+')
-df3['Page_Number8'] = df3['Unprocessed_Text'].str.findall('\s\d+\sClinical Genetics and Dysmorphology')
-
-df3['Page_Number9'] = df3['Unprocessed_Text'].str.findall('Prenatal and Perinatal Genetics\s\d+')
-df3['Page_Number10'] = df3['Unprocessed_Text'].str.findall('\s\d+\sPrenatal and Perinatal Genetics')
-
-df3['Page_Number11'] = df3['Unprocessed_Text'].str.findall('Gene Structure and Function\s\d+')
-df3['Page_Number12'] = df3['Unprocessed_Text'].str.findall('\s\d+\sGene Structure and Function')
-
-df3['Page_Number13'] = df3['Unprocessed_Text'].str.findall('Genetic Epidemiology and Population Genetics\s\d+')
-df3['Page_Number14'] = df3['Unprocessed_Text'].str.findall('\s\d+\sGenetic Epidemiology and Population Genetics')
-
-df3['Page_Number15'] = df3['Unprocessed_Text'].str.findall('Biochemical Basis of Genetic Diseasey\s\d+')
-df3['Page_Number16'] = df3['Unprocessed_Text'].str.findall('\s\d+\sBiochemical Basis of Genetic Disease')
-# -
-
-df3[df3['Page_Number1'].str.len() != 0]
-
-# +
-# Replace Blank values with DataFrame.replace() methods.
-df3 = df3.replace(r'^\s*$', np.nan, regex=True)
-df3.Page_Number1 = df3.Page_Number1.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number2 = df3.Page_Number2.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number3 = df3.Page_Number3.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number4 = df3.Page_Number4.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number5 = df3.Page_Number5.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number6 = df3.Page_Number6.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number7 = df3.Page_Number7.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number8 = df3.Page_Number8.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number9 = df3.Page_Number9.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number10 = df3.Page_Number10.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number11 = df3.Page_Number11.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number12= df3.Page_Number12.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number13 = df3.Page_Number13.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number14 = df3.Page_Number14.apply(lambda y: np.nan if len(y)==0 else y)
-df3.Page_Number15 = df3.Page_Number15.apply(lambda y: np.nan if len(y)==0 else y)
-
-# fill nans in Page_Number1 column with values of other columns
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number2'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number3'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number4'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number5'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number6'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number7'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number8'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number9'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number10'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number11'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number12'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number13'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number14'])
-df3['Page_Number1'] = df3['Page_Number1'].fillna(df3['Page_Number15'])
-# -
-
-# check nulls 
-df3['Page_Number1'].isna().sum()
-
-# find all non null values to check all other columns are merged into Page_Number1
-df3['Page_Number1'][df3['Page_Number1'].notnull()]
-
-# +
-# check either null or not 
-df3['Page_Number1'][df3['Page_Number1'].notnull()]
-
-# convert to string
-df3['Page_Number1'] = df3['Page_Number1'].astype('str')
-
-# extract only numbers
-df3['Page_Number1'] = df3['Page_Number1'].str.findall(r'\d+')
-
-# +
-# drop unnecessary columns 
-
-df3 = df3.drop(columns=['Page_Number2', 'Page_Number3', 'Page_Number4', 'Page_Number5', 'Page_Number6', 'Page_Number7','Page_Number8', 'Page_Number9', 'Page_Number10', 'Page_Number11', 'Page_Number12', 'Page_Number13', 'Page_Number14', 'Page_Number15', 'Page_Number16'])
-
-# +
 # separte out authors and affiliations
 
 df3['Free_Text'] = df3['Free_Text'].str.split('[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+')
@@ -375,9 +270,18 @@ df3 = df3.drop(columns = ['Unprocessed_Text', 'Free_Text'])
 # Add year column 
 df3['Year'] = 2001
 
+# strip quotations
+df3['Session_Code'] = df3['Session_Code'].str.strip('\'')
+df3['Email'] = df3['Email'].str.strip('\'')
+
+# +
+df3['Text'] = df3['Text'].str.strip(']')
+
+df3['Text'] = df3['Text'].str.strip(' ')
+df3['Text'] = df3['Text'].str.strip('\'')
+# -
+
 # generate csv
 df3.to_csv('results/ESHG2001abstractICHG.csv', index = False)  
 
 df3
-
-
