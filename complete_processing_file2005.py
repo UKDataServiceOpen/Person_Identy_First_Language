@@ -1,3 +1,18 @@
+# ---
+# jupyter:
+#   jupytext:
+#     formats: ipynb,py:light
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#       format_version: '1.5'
+#       jupytext_version: 1.14.0
+#   kernelspec:
+#     display_name: Python 3 (ipykernel)
+#     language: python
+#     name: python3
+# ---
+
 # # Import libraries
 
 import os
@@ -14,7 +29,7 @@ import re
 # +
 # creating .pdf file objects from existing .pdfs in the same folder as this .ipynb code
 
-pdffileobj = open('processed_dataset/ESHG2005Abstracts.pdf', 'rb') 
+pdffileobj = open('processed_dataset/ESHG2006Abstracts.pdf', 'rb') 
 # -
 
 pdfreader = PyPDF2.PdfReader(pdffileobj) 
@@ -32,14 +47,14 @@ for i in range(x):
    pageobj= pdfreader.pages[i]
    text=pageobj.extract_text()
    # Append-adds at last
-   file1 = open("processed_dataset_text/ESHG2005Abstracts.txt", "a", encoding='utf-8')  # append mode
+   file1 = open("processed_dataset_text/ESHG2006Abstracts.txt", "a", encoding='utf-8')  # append mode
    file1.write(text)
    file1.close()
 
 # +
 # Read back converted text file
 
-file1 = open("processed_dataset_text/ESHG2005Abstracts.txt", "r", encoding='latin-1')
+file1 = open("processed_dataset_text/ESHG2006Abstracts.txt", "r", encoding='latin-1')
 whole_file = file1.read()
 
 # +
@@ -231,4 +246,6 @@ df3['Session_Code'] = df3['Session_Code'].str.rstrip(']')
 df3['Session_Code'] = df3['Session_Code'].str.strip('\'')
 
 # save processed data into csv
-df3.to_csv('results/ESHG2005Abstracts.csv', index = False)  
+df3.to_csv('results/ESHG2006Abstracts.csv', index = False)  
+
+
