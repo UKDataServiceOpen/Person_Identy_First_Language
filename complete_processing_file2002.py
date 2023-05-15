@@ -240,9 +240,12 @@ df3['Text'] = df3['Text'].str.strip()
 df3 = df3.drop_duplicates()
 # -
 
+# strip quotations
+df3['Session_Code'] = df3['Session_Code'].str.lstrip('[')
+df3['Session_Code'] = df3['Session_Code'].str.rstrip(']')
+df3['Session_Code'] = df3['Session_Code'].str.strip('\'')
+
 # save processed data into csv
 df3.to_csv('results/ESHG2002Abstracts.csv', index = False)  
 
 df3
-
-
