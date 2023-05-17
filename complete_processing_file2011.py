@@ -1,17 +1,3 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.14.0
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
 
 # # Import libraries
 
@@ -292,7 +278,8 @@ df3 = df3.drop(columns = ['Unprocessed_Text', 'Free_Text', 'Author_and_Affiliati
 
 df3
 
+# change order of columns
+df3 = df3[['Title','Session_Code','Author', 'Affiliations', 'Text', 'Year']]
+
 # save processed data into csv
 df3.to_csv('results/ESHG2011Abstracts.csv', index = False)  
-
-df3
