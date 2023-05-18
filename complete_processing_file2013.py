@@ -1,18 +1,3 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.14.0
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
 # # Import libraries
 
 import os
@@ -118,20 +103,12 @@ print(new)
 df = pd.DataFrame (new, columns = ['Unprocessed_Text'])
 # -
 
-pd.set_option('display.max_rows', None)
-
-df
-
 df['Unprocessed_Text'] = df['Unprocessed_Text'].str.split(r"(\n[A-Z]\.)", 1)
 
-
-df
 
 df = df.replace('None', value=np.nan)
 
 df = df.dropna()
-
-df
 
 # +
 # create new dataframe and initialize it with previous dataframe to avoid making changes in the existing one
@@ -226,9 +203,6 @@ df2['Text']
 
 df2['Text'] = df2['Text'].str.split(r".", 1)
 df2['Text'] = df2['Text'].str[1]
-
-df2
-
 # +
 # Replace back = sign with comma 
 
@@ -300,11 +274,5 @@ df3 = df3.drop(columns = ['Unprocessed_Text', 'Free_Text', 'Author_and_Affiliati
 # drop only nulls where session_code is null to save S03.1
 df3 = df3.dropna(axis=0, subset=['Session_Code'])
 
-df3
-
 # save processed data into csv
 df3.to_csv('results/ESHG20133Abstracts.csv', index = True)  
-
-df3
-
-

@@ -1,4 +1,3 @@
-
 # # Import libraries
 
 import os
@@ -280,4 +279,4 @@ df3 = df3.drop(columns = ['Unprocessed_Text', 'Free_Text', 'Author_and_Affiliati
 df3 = df3[['Title','Session_Code','Author', 'Affiliations', 'Text', 'Year']]
 
 # save processed data into csv
-df3.to_csv('results/ESHG20122Abstracts.csv', index = False)  
+df3.to_csv('results/ESHG2012Abstracts.csv', index = False)  
