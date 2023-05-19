@@ -283,3 +283,5 @@ df3['Text'] = df3['Text'].str.strip('\'')
 
 # generate csv
 df3.to_csv('results/ESHG2001abstractICHG.csv', index = False)  
+
+df3

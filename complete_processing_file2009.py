@@ -1,3 +1,4 @@
+
 # # Import libraries
 
 import os
@@ -259,6 +260,7 @@ df3['Session_Code'] = df3['Session_Code'].str.lstrip('[')
 df3['Session_Code'] = df3['Session_Code'].str.rstrip(']')
 df3['Session_Code'] = df3['Session_Code'].str.strip('\'')
 
+df3
 
 # save processed data into csv
 df3.to_csv('results/ESHG2009Abstracts.csv', index = False)  
