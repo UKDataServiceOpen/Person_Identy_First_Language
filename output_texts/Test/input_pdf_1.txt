@@ -1,1 +1,0 @@
-Input .pdf for testing Test text. One. Two. Three. Figure 1 - A plane with caption to test caption conversion.
