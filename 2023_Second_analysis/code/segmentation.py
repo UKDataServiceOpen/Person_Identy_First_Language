@@ -29,7 +29,7 @@ class OneGramDist(dict):
     """
     def __init__(self, filename='count_1w_cleaned.txt'):
         self.total = 0
-        print('building probability table...')
+#        print('building probability table...')
         _open = open
         if filename.endswith('gz'):
             _open = gzip.open
@@ -59,7 +59,7 @@ def onegram_log(onegrams, words):
     result = functools.reduce(lambda x, y: x + y,
         (math.log10(onegrams(w)) for w in words))
 
-    print(words, result)
+#    print(words, result)
     return result
 
 
@@ -68,8 +68,8 @@ if __name__ == '__main__':
     if not sentence:
         sentence = 'thequickbrown'
     # onegrams = OneGramDist(filename='count_10M_gb.txt')
-    onegrams = OneGramDist(filename='count_1M_gb.txt.gz')
-    # onegrams = OneGramDist(filename='count_1w.txt')
+    # onegrams = OneGramDist(filename='count_1M_gb.txt.gz')
+    onegrams = OneGramDist(filename='count_1w.txt')
     onegram_fitness = functools.partial(onegram_log, onegrams)
     print(sentence)
     print(segment(sentence, word_seq_fitness=onegram_fitness))
