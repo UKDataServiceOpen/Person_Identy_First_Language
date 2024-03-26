@@ -1,0 +1,23 @@
+,PF_count,IF_count
+patient with ASD,50.0,
+patient with autism,47.0,
+child with ASD,21.0,
+child with autism,17.0,
+individual with ASD,16.0,
+individual with autism,16.0,
+boy with autism,6.0,
+proband with ASD,6.0,
+family with ASD,5.0,
+subject with ASD,5.0,
+ASD patient,,41.0
+autistic patient,,24.0
+autism patient,,16.0
+ASD case,,16.0
+autistic child,,16.0
+ASD family,,13.0
+ASD subject,,12.0
+autistic individual,,12.0
+ASD individual,,10.0
+autistic population,,6.0
+autistic group,,6.0
+ASD cohort,,5.0
